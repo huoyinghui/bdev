@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option java_package = "com.apkpure.proto";
+option java_outer_classname = "TokenService";
+
+package protos;
+
+// for grpc-gateway
+//#gw#import "google/api/annotations.proto";
+
+/*
+* jwt token
+*/
+service TokenService {
+
+    rpc GenAccessToken(GenToekenRequest) returns (GenTokenResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/token"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc CheckToken(CheckToekenRequest) returns (CheckTokenResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/check"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+}
+
+
+message GenToekenRequest {
+    // 用户id
+    string uid = 1;
+    // 过期时间戳，单位s
+    int64 exp = 2;
+}
+
+
+message GenTokenResponse {
+    string token = 1;
+}
+
+message CheckToekenRequest {
+    string token = 1;
+}
+
+message CheckTokenResponse {
+    string uid = 1;
+}

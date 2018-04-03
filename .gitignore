@@ -1,7 +1,11 @@
 # Binaries for programs and plugins
+bdev
+conf/app.yml
+swagger/
 *.exe
 *.dll
 *.so
+*.tmp
 *.dylib
 
 # Test binary, build with `go test -c`

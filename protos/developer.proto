@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+import "protos/token.proto";
+import "protos/aws_email.proto";
+import "protos/message.proto";
+
+package protos;
+
+option java_package = "com.apkpure.proto";
+option java_outer_classname = "DeveloperService";
+
+service DeveloperService {
+
+    rpc GenAccessToken(GenToekenRequest) returns (GenTokenResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/token"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc CheckToken(CheckToekenRequest) returns (CheckTokenResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/check"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    // 发送邮件
+    rpc SendMail (EmailRequest) returns (EmailResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/email/sendmail"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    // 站内信 API CURD
+    rpc MessageCreate(Message) returns (MessageResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/create"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessageUpdate(Message) returns (Message) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/update"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessageRead(MessageReadRequest) returns (MessageListResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/read"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessageDelete(MessageDeleteRequest) returns (MessageResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/delete"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+}

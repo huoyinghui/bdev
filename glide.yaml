@@ -1,0 +1,13 @@
+package: bdev
+import:
+- package: github.com/astaxie/beego
+  subpackages:
+  - context/param
+  - logs
+  - orm
+- package: github.com/lib/pq
+- package: gopkg.in/yaml.v2
+testImport:
+- package: github.com/smartystreets/goconvey
+  subpackages:
+  - convey
