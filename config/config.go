@@ -29,7 +29,7 @@ type AppConfInfo struct {
 var AppConf *AppConfInfo
 
 func init() {
-	Init("debug")
+	Init("")
 }
 
 var TestData = []byte(`
@@ -45,7 +45,7 @@ orm_debug: true
 enable_docs: true
 log_level: 7
 jwt_salt: testsalt
-access_key_id: ""
+access_key_id: "
 secret_access_key: ""
 region: ""
 `)
