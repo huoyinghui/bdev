@@ -20,6 +20,7 @@ type AppConfInfo struct {
 	OrmDebug        bool   `yml:"orm_debug" json:"orm_debug"`
 	EnableDocs      bool   `yml:"enable_docs" json:"enable_docs"`
 	LogLevel        int    `yml:"log_level" json:"log_level"`
+	JwtSalt         string `yaml:"jwt_salt" json:"jwt_salt"`
 }
 
 var AppConf *AppConfInfo
@@ -40,6 +41,7 @@ pgdatasource: user=postgres password=postgres dbname=test host=127.0.0.1 port=54
 ormdebug: true
 enabledocs: true
 loglevel: 7
+jwt_salt: testsalt
 `)
 
 func Init(t string) {

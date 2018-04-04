@@ -19,6 +19,7 @@ func TestNewConf(t *testing.T) {
 		OrmDebug:        true,
 		PgDataSource:    "user=postgres password=postgres dbname=test host=127.0.0.1 port=5432 sslmode=disable",
 		LogLevel:        logs.LevelDebug,
+		JwtSalt:         "testsalt",
 	}
 
 	data, err := yaml.Marshal(conf)

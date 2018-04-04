@@ -9,3 +9,4 @@ pgdatasource: user=postgres password=postgres dbname=test host=127.0.0.1 port=54
 ormdebug: true
 enabledocs: true
 loglevel: 7
+jwt_salt: testsalt
