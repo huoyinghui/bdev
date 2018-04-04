@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bdev/config"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -43,7 +44,8 @@ func init() {
 
 func Test_base64Encode(t *testing.T) {
 	payload, err := json.Marshal(Claims{
-		Uid: "5ab4d3b5f5f6720005bcdb12",
+		//Uid: "5ab4d3b5f5f6720005bcdb12",
+		Uid: "123456",
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -88,9 +90,9 @@ func TestDecodeB64(t *testing.T) {
 		{
 			name: "test",
 			args: args{
-				message: "eyJ1aWQiOiI1YWI0ZDNiNWY1ZjY3MjAwMDViY2RiMTIifQ==",
+				message: "eyJ1aWQiOiIxMjM0NTY3IiwiZXhwIjoxNTIyODE2MDkwLCJpc3MiOiIxMjM0NTY3In0",
 			},
-			wantRetour: "5ab4d3b5f5f6720005bcdb12",
+			wantRetour: "1234567",
 		},
 	}
 	for _, tt := range tests {
@@ -111,19 +113,6 @@ func TestDecodeB64(t *testing.T) {
 		})
 	}
 }
-
-func TestEncodeB642(t *testing.T) {
-	str := "eyJ1aWQiOiI1YWI0ZDNiNWY1ZjY3MjAwMDViY2RiMTIifQ=="
-	data, err := base64.StdEncoding.DecodeString(str)
-	if err != nil {
-		fmt.Println("error:", err)
-		return
-	}
-	ob := map[string]interface{}{}
-	e := json.Unmarshal([]byte(data), &ob)
-	fmt.Printf("%q e:%v ob:%v\n", data, e, ob["uid"])
-}
-
 func TestToMd5(t *testing.T) {
 	type args struct {
 		encode string
@@ -148,6 +137,17 @@ func TestToMd5(t *testing.T) {
 				t.Errorf("ToMd5() = %v, want %v", gotDecode, tt.wantDecode)
 			}
 		})
+	}
+}
+
+func TestSecSecret(t *testing.T) {
+	uid := "123456"
+	salt := config.AppConf.JwtSalt
+	for i:=0; i<100; i++ {
+		sec := SecSecret(uid,  salt)
+		if sec != "4041810df91001619b7b92ed48cf7a7e" {
+			t.Fatal(fmt.Errorf("sec:%v", sec))
+		}
 	}
 }
 
@@ -247,11 +247,22 @@ func TestAuthToken(t *testing.T) {
 			want:    "5ab4bef1c4cd748f32c6dff3",
 			wantErr: false,
 		},
+		// bug
+		{
+			name: "temp test.2",
+			args: args{
+				signedToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMjM0NTYiLCJleHAiOjE1MjI4MTM5MTgsImlzcyI6IjEyMzQ1NiJ9.4YGobtj3w3oCF2KFsbfh_1bLjkZ6aP5GPbR1T4j_5H4",
+				secret:      "4041810df91001619b7b92ed48cf7a7e=",
+			},
+			want:    "123456",
+			wantErr: false,
+		},
+
 	}
 	for index, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := AuthToken(tt.args.signedToken, tt.args.secret)
-			t.Log("index:", index, "err:", err, "got:", got)
+			t.Log("Name:", tt.name, "index:", index, "err:", err, "got:", got)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AuthToken() error = %v, wantErr %v", err, tt.wantErr)
 				return

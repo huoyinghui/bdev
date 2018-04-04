@@ -1,11 +1,13 @@
 package controllers
 
 import (
-	"bjwt/models"
-	"bjwt/utils"
+	"bdev/config"
+	"bdev/models"
+	"bdev/utils"
 	"encoding/json"
 
 	"github.com/astaxie/beego"
+	"bdev/logger"
 )
 
 // Operations about Token
@@ -25,13 +27,16 @@ func (o *ValidController) Post() {
 	json.Unmarshal(o.Ctx.Input.RequestBody, &ob)
 	uid, err := utils.GetUid(ob.Token)
 	if err != nil {
+		logger.Errorf("GetUid: %v", err)
 		o.Data["json"] = err.Error()
 		o.ServeJSON()
 		return
 	}
-	secret := utils.SecSecret(uid, "123")
+	secret := utils.SecSecret(uid, config.AppConf.JwtSalt)
+	logger.Debugf("sec:%v", secret)
 	newUid, err := utils.AuthToken(ob.Token, secret)
 	if err != nil {
+		logger.Errorf("AuthToken: %v", err)
 		o.Data["json"] = err.Error()
 	} else {
 		o.Data["json"] = map[string]string{"uid": uid, "new_uid": newUid}

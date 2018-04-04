@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"bdev/config"
 	"bdev/models"
 	"bdev/utils"
 	"encoding/json"
@@ -24,14 +25,14 @@ func (o *TokenController) Post() {
 	var ob models.UserAuth
 	json.Unmarshal(o.Ctx.Input.RequestBody, &ob)
 
-	secret := utils.SecSecret(ob.Uid, "123")
+	secret := utils.SecSecret(ob.Uid, config.AppConf.JwtSalt)
 	token, err := utils.CreateToken(ob.Uid, secret, 0)
 	if err != nil {
 		o.Data["json"] = err.Error()
 	} else {
 		o.Data["json"] = map[string]string{
 			"token": token,
-			//"secret": secret,
+			"secret": secret,
 		}
 	}
 	o.ServeJSON()

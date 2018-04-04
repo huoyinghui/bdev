@@ -13,6 +13,7 @@ type JWTSerController struct {
 
 func (jwts *JWTSerController) GenAccessToken(ctx context.Context, req *pb.GenToekenRequest) (*pb.GenTokenResponse, error) {
 	secret := utils.SecSecret(req.Uid, config.AppConf.JwtSalt)
+	logger.Debugf("sec:%v", secret)
 	token, err := utils.CreateToken(req.Uid, secret, req.Exp)
 	if err != nil {
 		logger.Errorf("req:%v err:%v token:%v", req, err, token)
@@ -32,6 +33,7 @@ func (jwts *JWTSerController) CheckToken(ctx context.Context, req *pb.CheckToeke
 	}
 	secret := utils.SecSecret(uid, config.AppConf.JwtSalt)
 	// 覆盖uid
+	logger.Debugf("sec:%v", secret)
 	uid, err = utils.AuthToken(req.Token, secret)
 	if err != nil {
 		logger.Errorf("req:%v err:%v uid:%v", req, err, uid)

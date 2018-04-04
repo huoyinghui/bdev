@@ -16,12 +16,14 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func EncodeB64(src []byte) (retour string) {
-	return base64.StdEncoding.EncodeToString(src)
-}
-
+//jwt.payload 解码
 func DecodeB64(message string) ([]byte, error) {
-	return base64.StdEncoding.DecodeString(message)
+	payloadBytes, err := jwt.DecodeSegment(message);
+	if err != nil {
+		return nil, err
+	}
+
+	return payloadBytes, nil
 }
 
 func SecSecret(uid, salt string) string {
@@ -101,12 +103,12 @@ func GetUid(token string) (string, error) {
 	payload := parts[1]
 	data, err := DecodeB64(payload)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("serr:%v GetUid.DecodeB64", err)
 	}
 	ob := Claims{}
 	err = json.Unmarshal(data, &ob)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("serr:%v GetUid.Unmarshal", err)
 	}
 
 	return ob.Uid, nil
