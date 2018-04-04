@@ -46,7 +46,7 @@ message Message {
     int64 id = 1;
     int64 fromUserId = 2;
     int64 toUserId = 3;
-    // 时间戳ms
+    // 时间戳s
     int64 createdAt = 4;
     string title = 5;
     string message = 6;

@@ -1,13 +1,17 @@
 syntax = "proto3";
 
-import "protos/token.proto";
-import "protos/aws_email.proto";
-import "protos/message.proto";
+import "token.proto";
+import "aws_email.proto";
+import "message.proto";
 
 package protos;
 
 option java_package = "com.apkpure.proto";
 option java_outer_classname = "DeveloperService";
+
+// for grpc-gateway
+//#gw#import "google/api/annotations.proto";
+
 
 service DeveloperService {
 
