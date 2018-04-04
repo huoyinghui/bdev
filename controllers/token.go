@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"bjwt/models"
-	"bjwt/utils"
+	"bdev/models"
+	"bdev/utils"
 	"encoding/json"
 
 	"github.com/astaxie/beego"

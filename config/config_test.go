@@ -10,7 +10,7 @@ import (
 func TestNewConf(t *testing.T) {
 	conf := AppConfInfo{
 		AppName:         "bdev",
-		HttpPort:        5008,
+		HttpPort:        4008,
 		GrpcListen:      ":5008",
 		RunMode:         "prod",
 		AutoRender:      false,
@@ -20,6 +20,9 @@ func TestNewConf(t *testing.T) {
 		PgDataSource:    "user=postgres password=postgres dbname=test host=127.0.0.1 port=5432 sslmode=disable",
 		LogLevel:        logs.LevelDebug,
 		JwtSalt:         "testsalt",
+		AccessKeyID:		"",
+		SecretAccessKey:	"",
+		Region:				"",
 	}
 
 	data, err := yaml.Marshal(conf)

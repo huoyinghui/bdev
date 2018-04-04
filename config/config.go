@@ -10,17 +10,20 @@ import (
 )
 
 type AppConfInfo struct {
-	AppName         string `yml:"app_name" json:"app_name"`
-	HttpPort        int    `yml:"http_port" json:"http_port"`
-	RunMode         string `yml:"run_mode" json:"run_mode"`
-	AutoRender      bool   `yml:"auto_render" json:"auto_render"`
-	CopyRequestBody bool   `yml:"copy_request_body" json:"copy_request_body"`
-	GrpcListen      string `yml:"grpc_listen" json:"grpc_listen"`
-	PgDataSource    string `yml:"pg_data_source" json:"pg_data_source"`
-	OrmDebug        bool   `yml:"orm_debug" json:"orm_debug"`
-	EnableDocs      bool   `yml:"enable_docs" json:"enable_docs"`
-	LogLevel        int    `yml:"log_level" json:"log_level"`
+	AppName         string `yaml:"app_name" json:"app_name"`
+	HttpPort        int    `yaml:"http_port" json:"http_port"`
+	RunMode         string `yaml:"run_mode" json:"run_mode"`
+	AutoRender      bool   `yaml:"auto_render" json:"auto_render"`
+	CopyRequestBody bool   `yaml:"copy_request_body" json:"copy_request_body"`
+	GrpcListen      string `yaml:"grpc_listen" json:"grpc_listen"`
+	PgDataSource    string `yaml:"pg_data_source" json:"pg_data_source"`
+	OrmDebug        bool   `yaml:"orm_debug" json:"orm_debug"`
+	EnableDocs      bool   `yaml:"enable_docs" json:"enable_docs"`
+	LogLevel        int    `yaml:"log_level" json:"log_level"`
 	JwtSalt         string `yaml:"jwt_salt" json:"jwt_salt"`
+	AccessKeyID 	string `yaml:"access_key_id", json:"access_key_id"`
+	SecretAccessKey string `yaml:"secret_access_key", json:"secret_access_key"`
+	Region			string `yaml:"region" json:"region"`
 }
 
 var AppConf *AppConfInfo
@@ -30,18 +33,21 @@ func init() {
 }
 
 var TestData = []byte(`
-appname: bdev
-httpport: 5008
-runmode: prod
-autorender: false
-copyrequestbody: true
-grpclisten: :5008
-pgdatasource: user=postgres password=postgres dbname=test host=127.0.0.1 port=5432
+app_name: bdev
+http_port: 4008
+run_mode: prod
+auto_render: false
+copy_request_body: true
+grpc_listen: :5008
+pg_data_source: user=postgres password=postgres dbname=test host=127.0.0.1 port=5432
   sslmode=disable
-ormdebug: true
-enabledocs: true
-loglevel: 7
+orm_debug: true
+enable_docs: true
+log_level: 7
 jwt_salt: testsalt
+access_key_id: ""
+secret_access_key: ""
+region: ""
 `)
 
 func Init(t string) {

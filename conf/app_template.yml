@@ -1,12 +1,15 @@
-appname: bdev
-httpport: 5008
-runmode: prod
-autorender: false
-copyrequestbody: true
-grpclisten: :5008
-pgdatasource: user=postgres password=postgres dbname=test host=127.0.0.1 port=5432
+app_name: bdev
+http_port: 4008
+run_mode: prod
+auto_render: false
+copy_request_body: true
+grpc_listen: :5008
+pg_data_source: user=postgres password=postgres dbname=test host=127.0.0.1 port=5432
   sslmode=disable
-ormdebug: true
-enabledocs: true
-loglevel: 7
+orm_debug: true
+enable_docs: true
+log_level: 7
 jwt_salt: testsalt
+access_key_id: ""
+secret_access_key: ""
+region: ""

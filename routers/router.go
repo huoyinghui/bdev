@@ -14,8 +14,8 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1/",
-		beego.NSNamespace("/api/msg",
+	ns := beego.NewNamespace("/v1/api/",
+		beego.NSNamespace("/msg",
 			//CRUD Create(创建)、Read(读取)、Update(更新)和Delete(删除)
 			beego.NSNamespace("/create",
 				// by FromUserId 发送一封邮件
@@ -30,6 +30,16 @@ func init() {
 			beego.NSNamespace("/delete",
 				//by message id 删除已读信息
 				beego.NSRouter("/", &controllers.MessageController{}, "post:DeleteMessage"),
+			),
+		),
+		beego.NSNamespace("/token",
+			beego.NSInclude(
+				&controllers.TokenController{},
+			),
+		),
+		beego.NSNamespace("/valid",
+			beego.NSInclude(
+				&controllers.ValidController{},
 			),
 		),
 	)
