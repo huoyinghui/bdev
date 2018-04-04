@@ -28,13 +28,22 @@ func init() {
 
 func main() {
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(2)
 	go func() {
+		logger.Debug("grpc server start")
 		grpcStart()
+		logger.Debug("grpc done")
 		wg.Done()
 	}()
+	go func() {
+		logger.Debug("http server start")
+		beego.Run()
+		logger.Debug("http server done")
+		wg.Done()
+	}()
+
 	wg.Wait()
-	logger.Debug("ser done")
+	logger.Warn("Ser done")
 }
 
 func grpcStart() {
