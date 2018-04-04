@@ -24,7 +24,7 @@ service EmailService {
 
 
 message EmailRequest {
-    string from = 1;                // 发件人
+    string sender = 1;                // 发件人
     string to = 2;                  // 收件人
     repeated string cc = 3;         // 抄送列表
     string subject = 4;             // 话题

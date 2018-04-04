@@ -2,10 +2,8 @@ package utils
 
 import (
 	"bdev/config"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"reflect"
 	"testing"
 )
 
@@ -40,41 +38,6 @@ func init() {
 		},
 	}
 	testData = testDatas[0]
-}
-
-func Test_base64Encode(t *testing.T) {
-	payload, err := json.Marshal(Claims{
-		//Uid: "5ab4d3b5f5f6720005bcdb12",
-		Uid: "123456",
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	type args struct {
-		src []byte
-	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		// TODO: Add test cases.
-		{
-			name: "test",
-			args: args{
-				src: payload,
-			},
-			want: "eyJ1aWQiOiI1YWI0ZDNiNWY1ZjY3MjAwMDViY2RiMTIifQ==",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := EncodeB64(tt.args.src); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("base64Encode() = %v, \nwant %v", string(got), string(tt.want))
-			}
-		})
-	}
 }
 
 func TestDecodeB64(t *testing.T) {

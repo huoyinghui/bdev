@@ -1,4 +1,4 @@
-package controllers
+package utils
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ https://apkpure.com`
 	}
 
 	//ret, err := SendMail("", recipient, subject, charSet, "", htmlBody, []*string{})
-	ret, err := sendMail("", recipient, subject, charSet, "", htmlBody, cc)
+	ret, err := SendMail("", recipient, subject, charSet, "", htmlBody, cc)
 	if err != nil {
 		t.Fatal(err)
 	}

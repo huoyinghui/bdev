@@ -1,4 +1,4 @@
-package controllers
+package utils
 
 import (
 	"bdev/config"
@@ -70,7 +70,7 @@ func init() {
 	svc = ses.New(sess)
 }
 
-func sendMail(sender, recipient, subject, charSet, htmlBody, textBody string, cc []string) (*ses.SendEmailOutput, error) {
+func SendMail(sender, recipient, subject, charSet, htmlBody, textBody string, cc []string) (*ses.SendEmailOutput, error) {
 	if "" == sender {
 		sender = Sender
 	}
