@@ -1,26 +1,24 @@
 package test
 
 import (
-	"context"
 	pb "bdev/protos"
 	_ "bdev/routers"
+	"context"
 	"testing"
 
 	"google.golang.org/grpc"
 )
 
-
 var (
 	address = "192.168.0.96:5008"
 )
 
-
 func TestGrpcCreate(t *testing.T) {
 	req := pb.Message{
 		FromUserId: int64(0),
-		ToUserId: int64(1),
-		Title: "APKPURE DEV",
-		Message: "Welcome to join us",
+		ToUserId:   int64(1),
+		Title:      "APKPURE DEV",
+		Message:    "Welcome to join us",
 	}
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
@@ -39,7 +37,7 @@ func TestGrpcCreate(t *testing.T) {
 
 func TestGrpcRead(t *testing.T) {
 	req := pb.MessageReadRequest{
-		PageSize: 5,
+		PageSize:   5,
 		PageNumber: 1,
 		//MsgType: "ALL",
 		MsgType: "SEEN",
@@ -66,7 +64,7 @@ func TestGrpcRead(t *testing.T) {
 
 func TestGrpcUpdate(t *testing.T) {
 	req := pb.Message{
-		Id: int64(24),
+		Id:     int64(24),
 		Status: "SEEN",
 	}
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
@@ -103,13 +101,3 @@ func TestGrpcDelete(t *testing.T) {
 
 	t.Logf("resp:%v", r)
 }
-
-
-
-
-
-
-
-
-
-

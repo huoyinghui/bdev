@@ -1,14 +1,13 @@
 package controllers
 
 import (
-	"bdev/models"
 	"bdev/logger"
+	"bdev/models"
 	pb "bdev/protos"
 	context "golang.org/x/net/context"
 )
 
 type MsgSerController struct {
-
 }
 
 func (this *MsgSerController) MessageCreate(ctx context.Context, req *pb.Message) (*pb.MessageResponse, error) {
@@ -28,7 +27,7 @@ func (this *MsgSerController) MessageCreate(ctx context.Context, req *pb.Message
 }
 
 func (this *MsgSerController) MessageDelete(ctx context.Context, req *pb.MessageDeleteRequest) (*pb.MessageResponse, error) {
-	err := models.DeleteMessage(req.Id);
+	err := models.DeleteMessage(req.Id)
 	if err != nil {
 		logger.Errorf("err:%v req:%v", err, req)
 		return nil, err
@@ -49,14 +48,14 @@ func (this *MsgSerController) MessageUpdate(ctx context.Context, req *pb.Message
 		return nil, err
 	}
 	return &pb.Message{
-		Id: msg.Id,
+		Id:         msg.Id,
 		FromUserId: msg.FromUserId,
-		ToUserId: msg.ToUserId,
-		CreatedAt: msg.CreatedAt.Unix(),
-		Title: msg.Title,
-		Message: msg.Message,
-		Status: msg.Status,
-		IsDelete: msg.IsDelete,
+		ToUserId:   msg.ToUserId,
+		CreatedAt:  msg.CreatedAt.Unix(),
+		Title:      msg.Title,
+		Message:    msg.Message,
+		Status:     msg.Status,
+		IsDelete:   msg.IsDelete,
 	}, nil
 }
 
@@ -78,22 +77,22 @@ func (this *MsgSerController) MessageRead(ctx context.Context, req *pb.MessageRe
 	for _, msg := range msgList {
 		logger.Debugf("msg:%v", msg)
 		msg := pb.Message{
-			Id: msg.Id,
+			Id:         msg.Id,
 			FromUserId: msg.FromUserId,
-			ToUserId: msg.ToUserId,
-			Title: msg.Title,
-			Message: msg.Message,
-			CreatedAt: msg.CreatedAt.Unix(),
-			Status: msg.Status,
-			IsDelete: msg.IsDelete,
+			ToUserId:   msg.ToUserId,
+			Title:      msg.Title,
+			Message:    msg.Message,
+			CreatedAt:  msg.CreatedAt.Unix(),
+			Status:     msg.Status,
+			IsDelete:   msg.IsDelete,
 		}
 		pmsgList = append(pmsgList, &msg)
 	}
 
 	return &pb.MessageListResponse{
 		PageNumber: req.PageNumber,
-		PageSize: req.PageSize,
-		Nums: nums,
-		MsgList: pmsgList,
+		PageSize:   req.PageSize,
+		Nums:       nums,
+		MsgList:    pmsgList,
 	}, nil
 }

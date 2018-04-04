@@ -3,8 +3,8 @@ package controllers
 import (
 	"bdev/config"
 	"bdev/logger"
-	"bdev/utils"
 	pb "bdev/protos"
+	"bdev/utils"
 	context "golang.org/x/net/context"
 )
 

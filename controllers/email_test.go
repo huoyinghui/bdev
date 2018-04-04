@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestSendMail(t *testing.T) {

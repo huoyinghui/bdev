@@ -1,19 +1,19 @@
 package main
 
 import (
-	"bdev/models"
 	"bdev/controllers"
 	"bdev/logger"
+	"bdev/models"
 	_ "bdev/routers"
 	_ "github.com/lib/pq"
 
 	"bdev/config"
 	pb "bdev/protos"
 	"github.com/astaxie/beego"
-	"sync"
-	"net"
-	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	"net"
+	"sync"
 )
 
 func init() {
@@ -59,5 +59,3 @@ func grpcStart() {
 		panic(err)
 	}
 }
-
-

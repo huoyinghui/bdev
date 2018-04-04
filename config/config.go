@@ -21,9 +21,9 @@ type AppConfInfo struct {
 	EnableDocs      bool   `yaml:"enable_docs" json:"enable_docs"`
 	LogLevel        int    `yaml:"log_level" json:"log_level"`
 	JwtSalt         string `yaml:"jwt_salt" json:"jwt_salt"`
-	AccessKeyID 	string `yaml:"access_key_id", json:"access_key_id"`
+	AccessKeyID     string `yaml:"access_key_id", json:"access_key_id"`
 	SecretAccessKey string `yaml:"secret_access_key", json:"secret_access_key"`
-	Region			string `yaml:"region" json:"region"`
+	Region          string `yaml:"region" json:"region"`
 }
 
 var AppConf *AppConfInfo

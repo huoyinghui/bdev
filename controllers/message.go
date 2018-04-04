@@ -66,11 +66,11 @@ func (o *MessageController) ReadMessage() {
 		o.Data["json"] = err.Error()
 	} else {
 		o.Data["json"] = map[string]interface{}{
-			"err":  "",
-			"nums": nums,
-			"data": msgList,
+			"err":        "",
+			"nums":       nums,
+			"data":       msgList,
 			"pageNumber": ob.PageNumber,
-			"pageSize": ob.PageSize,
+			"pageSize":   ob.PageSize,
 		}
 	}
 	o.ServeJSON()
